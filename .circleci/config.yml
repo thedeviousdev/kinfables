@@ -1,0 +1,46 @@
+version: 2.0
+
+jobs:
+  upload-via-sftp:
+    working_directory: ~/tmp
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    steps:
+      - checkout
+      # - persist_to_workspace:
+      #     root: /home/circleci/tmp
+      #     paths:
+      #       - .
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "wp-content/themes/starter-theme/package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      # Download and cache dependencies
+      - run: cd wp-content/themes/starter-theme; node -v; npm install; ls; npm run production
+
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "wp-content/themes/starter-theme/package.json" }}
+          paths:
+            - wp-content/themes/starter-theme/node_modules
+
+      # run tests!
+      # - run: npm run production
+
+      - run:
+          name: Install LFTP
+          command: |
+            sudo apt-get update  --allow-releaseinfo-change;
+            sudo apt-get install lftp;
+
+      - run:
+          name: Send Via SFTP
+          command: lftp -c "set sftp:auto-confirm yes ; open -u $SERVER_USERNAME,$SERVER_PASSWORD sftp://$SERVER_HOST ; mirror -v -R --exclude .git/ --exclude .circleci/ --exclude wp-content/uploads/ --exclude wp-content/themes/starter-theme/node_modules --exclude wp-content/themes/starter-theme/src --exclude wp-content/themes/starter-theme/package-lock.json --exclude wp-content/themes/starter-theme/package.json --exclude docker-compose.yml ./ $SERVER_PATH; quit"
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - upload-via-sftp
