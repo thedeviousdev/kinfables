@@ -1,8 +1,9 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  test: /\.sass$/,
+  test: /\.s[ac]ss$/i,
   use: [
+    MiniCssExtractPlugin.loader,
     'vue-style-loader',
     'css-loader',
     {
