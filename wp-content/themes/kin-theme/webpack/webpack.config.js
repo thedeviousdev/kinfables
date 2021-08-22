@@ -21,7 +21,7 @@ module.exports = {
     rules: loaders,
   },
   resolve: {
-    extensions: ['.js', '.css', '.vue'],
+    extensions: ['.js', '.sass', '.vue'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
     },

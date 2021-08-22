@@ -29,11 +29,3 @@ export default {
   },
 };
 </script>
-
-<style type="postcss" scoped>
-.page-content {
-  & >>> p {
-    margin-bottom: 1rem;
-  }
-}
-</style>

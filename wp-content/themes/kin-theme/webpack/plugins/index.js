@@ -8,7 +8,7 @@ plugins = [
     throttle: 'lodash.throttle',
   }),
   new webpack.LoaderOptionsPlugin({ minimize: true }),
-  new ExtractTextPlugin('styles.css'),
+  new ExtractTextPlugin('styles.sass'),
   new VueLoaderPlugin(),
 ];
 

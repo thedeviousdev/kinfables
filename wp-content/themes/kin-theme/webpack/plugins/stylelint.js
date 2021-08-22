@@ -3,8 +3,8 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = new StyleLintPlugin({
   configFile: path.resolve(__dirname, '../.stylelintrc'),
-  context: path.resolve(__dirname, '../../src/assets/css'),
-  files: '**/*.css',
+  context: path.resolve(__dirname, '../../src/assets/sass'),
+  files: '**/*.sass',
   failOnError: false,
   quiet: true,
 });
