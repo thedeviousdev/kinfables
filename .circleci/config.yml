@@ -15,7 +15,7 @@ jobs:
             - v1-dependencies-
 
       # Download and cache dependencies
-      - run: cd wp-content/themes/kin-theme; node -v; npm install; ls; npm run production
+      - run: cd wp-content/themes/kin-theme; node -v; npm install; ls; npm run build
 
       - save_cache: # special step to save the dependency cache
           key: dependency-cache-{{ checksum "wp-content/themes/kin-theme/package.json" }}
