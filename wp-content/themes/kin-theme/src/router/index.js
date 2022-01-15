@@ -1,25 +1,54 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import Vue from 'vue';
+import Router from 'vue-router';
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-];
+// Components
+import Home from '../components/Home.vue';
+import Post from '../components/Post/Post.vue';
+import Page from '../components/Page/Page.vue';
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+Vue.use(Router);
+
+const router = new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      // Assuming you're using the default permalink structure for posts
+      path: '/:year/:month/:day/:postSlug',
+      name: 'Post',
+      component: Post,
+    },
+    {
+      path: '/:pageSlug',
+      name: 'Page',
+      component: Page,
+    },
+  ],
+  mode: 'history',
+  base: '',
+
+  // Prevents window from scrolling back to top
+  // when navigating between components/views
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
+});
+
+router.afterEach((to) => { // (to, from)
+  // Add a body class specific to the route we're viewing
+  let body = document.querySelector('body');
+
+  const slug = !(to.params.postSlug)
+    ? to.params.pageSlug
+    : to.params.postSlug;
+  body.classList.add('vue--page--' + slug);
 });
 
 export default router;

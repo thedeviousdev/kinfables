@@ -1,30 +1,60 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="my-app" class="flex flex-col md:min-h-screen">
+    <app-header />
+
+    <transition name="loader-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <progress-bar :show-loader="showLoader" :loader-style="loaderStyle" />
+    </transition>
+
+    <transition name="page-transition" mode="out-in" appear>
+      <div class="site-content mx-auto py-16 flex-1 px-10 md:px-0 max-w-2xl">
+        <router-view></router-view>
+      </div>
+    </transition>
+
+    <app-footer />
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapGetters, mapActions, mapMutations } from 'vuex';
+import Header from './components/partials/Header.vue';
+import Footer from './components/partials/Footer.vue';
+import ProgressBar from './components/partials/ProgressBar.vue';
 
-#nav {
-  padding: 30px;
+export default {
+  data() {
+    return {
+      showLoader: true,
+    };
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'isLoading',
+      loadingProgress: 'loadingProgress',
+    }),
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    loaderStyle() {
+      return `width: ${this.loadingProgress}%;`;
+    },
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  components: {
+    appHeader: Header,
+    appFooter: Footer,
+    ProgressBar,
+  },
+
+  watch: {
+    // watch the value of isLoading and once it's false hide the loader
+    isLoading(val) {
+      if (val == false) {
+        let self = this;
+        setTimeout(function() {
+          self.showLoader = false;
+        }, 1000);
+      }
+    },
+  },
+};
+</script>
