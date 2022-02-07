@@ -4,7 +4,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 module.exports = new StyleLintPlugin({
   configFile: path.resolve(__dirname, '../.stylelintrc'),
   context: path.resolve(__dirname, '../../src/assets/css'),
-  files: '**/*.css',
+  files: '**/*.scss',
   failOnError: false,
   quiet: true,
 });
