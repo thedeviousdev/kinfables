@@ -1,9 +1,11 @@
 <template>
   <div id="my-app" class="flex flex-col md:min-h-screen">
-    <app-header />
+    <Menu />
+    <!-- <app-header />
 
     <transition name="loader-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <progress-bar :show-loader="showLoader" :loader-style="loaderStyle" />
+      Loading
     </transition>
 
     <transition name="page-transition" mode="out-in" appear>
@@ -12,7 +14,7 @@
       </div>
     </transition>
 
-    <app-footer />
+    <app-footer /> -->
   </div>
 </template>
 
@@ -20,7 +22,8 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 import Header from './components/partials/Header.vue';
 import Footer from './components/partials/Footer.vue';
-import ProgressBar from './components/partials/ProgressBar.vue';
+// import ProgressBar from './components/partials/ProgressBar.vue';
+import Menu from './components/partials/Menu.vue';
 
 export default {
   data() {
@@ -31,7 +34,7 @@ export default {
   computed: {
     ...mapGetters({
       isLoading: 'isLoading',
-      loadingProgress: 'loadingProgress',
+      // loadingProgress: 'loadingProgress',
     }),
 
     loaderStyle() {
@@ -42,7 +45,8 @@ export default {
   components: {
     appHeader: Header,
     appFooter: Footer,
-    ProgressBar,
+    // ProgressBar,
+    Menu
   },
 
   watch: {

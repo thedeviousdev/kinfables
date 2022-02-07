@@ -53,13 +53,3 @@
     </div>
   </nav>
 </template>
-
-<style type="postcss" scoped>
-.logo-cls-1 {
-  fill: #ffffff;
-}
-
-.site-header {
-  background: linear-gradient(to right, #92025f, #3b1e58);
-}
-</style>

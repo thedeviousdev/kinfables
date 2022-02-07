@@ -1,6 +1,6 @@
 import Vue from 'vue';
 require('./bootstrap');
-import './assets/css/styles.css';
+import './assets/css/styles.scss';
 
 import router from './router';
 import App from './App.vue';
