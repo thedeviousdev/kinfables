@@ -3,6 +3,12 @@
       "stylelint-order"
     ],
     "rules": {
+      "indentation": [
+        2,
+        {
+          "baseIndentLevel": 1
+        }
+      ],
       "order/order": [
         "custom-properties",
         "dollar-variables",
@@ -27,7 +33,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "display",
             "visibility",
@@ -46,7 +52,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "box-sizing",
             "width",
@@ -68,7 +74,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "table-layout",
             "empty-cells",
@@ -82,7 +88,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "content",
             "quotes",
@@ -141,7 +147,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "opacity",
             "interpolation-mode",
@@ -200,7 +206,7 @@
           ]
         },
         {
-          "emptyLineBefore": "always",
+          "emptyLineBefore": "never",
           "properties": [
             "font",
             "font-family",

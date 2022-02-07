@@ -3,6 +3,7 @@
   "scripts": {
     "watch": "NODE_ENV=development webpack --watch --config ./webpack/webpack.config.js",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.config.js --display-entrypoints",
+    "fix": "stylelint '**/*.css' --config 'webpack/.stylelintrc' --fix",
     "rmdist": "rimraf dist"
   },
   "devDependencies": {

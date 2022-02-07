@@ -5,10 +5,14 @@
     "javascript"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true 
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
   "eslint.format.enable": true,
   "eslint.workingDirectories": [
+
       { "mode": "auto" }
-  ]
+  ],
+  "stylelint.enable": true,
+  "stylelint.configFile": "./wp-content/themes/kin-theme/webpack/.stylelintrc"
 }
