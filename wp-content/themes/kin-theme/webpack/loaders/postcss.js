@@ -4,6 +4,14 @@ module.exports = {
   test: /\.s(c|a)ss$/,
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
-    use: [{ loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader'],
+    use: [
+      { 
+      loader: 'css-loader', 
+      options: { importLoaders: 1 } 
+    }, 
+    {
+      loader: 'postcss-loader',
+      options: { parser: "postcss-scss" }}
+  ],
   }),
 };
