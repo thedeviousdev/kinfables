@@ -14,5 +14,6 @@
       { "mode": "auto" }
   ],
   "stylelint.enable": true,
-  "stylelint.configFile": "/wp-content/themes/kin-theme/webpack/.stylelintrc"
+  "stylelint.configFile": "./wp-content/themes/kin-theme/webpack/.stylelintrc",
+  "stylelint.validate": ["css", "scss"]
 }
