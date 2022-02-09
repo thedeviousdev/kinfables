@@ -1,34 +1,36 @@
 <template>
-  <div class="menu menu-open">
-    <div class="menu-trigger">
+  <div class="menu" :class="{ 'menu-open': isMenuOpen }">
+    <button class="menu-trigger" @click="toggleMenu">
       <CircleInner />
-    </div>
-    <div class="menu-circle">
-      <a href="#" class="menu-circle-link menu-link-1">
-        <span>Home</span>
-      </a>
+    </button>
+    <transition name="bounce">
+      <div class="menu-circle" v-if="isMenuOpen">
+        <a href="#" class="menu-circle-link menu-link-1">
+          <span>Home</span>
+        </a>
 
-      <a href="#" class="menu-circle-link menu-link-2">
-        <span>Film</span>
-      </a>
+        <a href="#" class="menu-circle-link menu-link-2">
+          <span>Film</span>
+        </a>
 
-      <a href="#" class="menu-circle-link menu-link-3">
-        <span>Music</span>
-      </a>
+        <a href="#" class="menu-circle-link menu-link-3">
+          <span>Music</span>
+        </a>
 
-      <a href="#" class="menu-circle-link menu-link-4">
-        <span>About</span>
-      </a>
+        <a href="#" class="menu-circle-link menu-link-4">
+          <span>About</span>
+        </a>
 
-      <a href="#" class="menu-circle-link menu-link-5">
-        <span>Gallery</span>
-      </a>
+        <a href="#" class="menu-circle-link menu-link-5">
+          <span>Gallery</span>
+        </a>
 
-      <a href="#" class="menu-circle-link menu-link-6">
-        <span>Novel</span>
-      </a>
-    </div>
-    <div class="menu-bg">
+        <a href="#" class="menu-circle-link menu-link-6">
+          <span>Novel</span>
+        </a>
+      </div>
+    </transition>
+    <div class="menu-bg" v-if="isMenuOpen">
       <MenuBg />
     </div>
   </div>
@@ -43,6 +45,16 @@ export default {
   components: {
     MenuBg, CircleInner
   },
-  props: ["loaderStyle", "showLoader"]
+  props: ["loaderStyle", "showLoader"],
+  data() {
+    return {
+      isMenuOpen: false
+    }
+  },
+  methods: {
+    toggleMenu: function() {
+      this.isMenuOpen = !this.isMenuOpen;
+    }
+  }
 };
 </script>

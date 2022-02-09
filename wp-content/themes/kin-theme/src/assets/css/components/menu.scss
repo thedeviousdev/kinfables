@@ -1,0 +1,122 @@
+.menu {
+  position: absolute;
+  top: 0;
+  align-items: center;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-open {
+  .menu-trigger {
+    background-color: transparent;
+  }
+}
+
+.menu-bg {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    min-width: 1923px;
+    margin-top: -2px;
+    margin-left: -5px;
+  }
+}
+
+.menu-circle {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  overflow: hidden;
+  width: 392.5px;
+  height: 392.5px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.menu-trigger {
+  position: absolute;
+  z-index: 3;
+  top: calc(50% - 38px);
+  left: calc(50% - 38px);
+  display: flex;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-link {
+  display: none;
+}
+
+.menu-circle-link {
+  top: calc(50% - 76px);
+  left: calc(50% - 76px);
+  display: block;
+  text-decoration: none;
+}
+
+.center-circle {
+  position: absolute;
+  z-index: 1000;
+  top: calc(50% - 38px);
+  left: calc(50% - 38px);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.menu-link-1,
+.menu-link-2,
+.menu-link-3,
+.menu-link-4,
+.menu-link-5,
+.menu-link-6 {
+  position: absolute;
+  display: flex;
+  width: 152px;
+  height: 152px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.menu-link-1 {
+  transform: rotate(-90deg) translate(120.25px) rotate(90deg);
+}
+
+.menu-link-2 {
+  transform: rotate(-25deg) translate(120.25px) rotate(25deg);
+}
+
+.menu-link-3 {
+  transform: rotate(25deg) translate(120.25px) rotate(-25deg);
+}
+
+.menu-link-4 {
+  transform: rotate(90deg) translate(120.25px) rotate(-90deg);
+}
+
+.menu-link-5 {
+  transform: rotate(155deg) translate(120.25px) rotate(-155deg);
+}
+
+.menu-link-6 {
+  transform: rotate(205deg) translate(120.25px) rotate(-205deg);
+}
