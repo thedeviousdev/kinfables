@@ -9,7 +9,7 @@ plugins = [
   }),
   new webpack.LoaderOptionsPlugin({ minimize: true }),
   new MiniCssExtractPlugin({
-    filename: "style.css",
+    filename: "styles.css",
     chunkFilename: "[id].css",
   }),
   new VueLoaderPlugin(),
