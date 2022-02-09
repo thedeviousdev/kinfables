@@ -1,7 +1,4 @@
 {
-    "plugins": [
-      "stylelint-order"
-    ],
     "rules": {
       "indentation": [
         2,

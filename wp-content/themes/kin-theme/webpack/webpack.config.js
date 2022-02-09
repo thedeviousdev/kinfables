@@ -1,5 +1,7 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+
 
 const plugins = require('./plugins');
 const loaders = require('./loaders');
@@ -21,7 +23,7 @@ module.exports = {
     rules: loaders,
   },
   resolve: {
-    extensions: ['.js', '.scss', '.css', '.vue'],
+    extensions: ['.js', '.css', '.vue'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
     },
@@ -33,22 +35,23 @@ module.exports = {
     minimizer: isDev
       ? []
       : [
-          new UglifyJsPlugin({
-            // include: [path.resolve(__dirname, '../src')],
-            cache: true,
-            parallel: true,
-            extractComments: true,
-            uglifyOptions: {
-              warnings: false,
-              parse: {},
-              compress: {},
-              mangle: true,
-              output: null,
-              ie8: false,
-              keep_fnames: false,
-              toplevel: false,
-            },
-          }),
+          // new UglifyJsPlugin({
+          //   // include: [path.resolve(__dirname, '../src')],
+          //   cache: true,
+          //   parallel: true,
+          //   extractComments: true,
+          //   uglifyOptions: {
+          //     warnings: false,
+          //     parse: {},
+          //     compress: {},
+          //     mangle: true,
+          //     output: null,
+          //     ie8: false,
+          //     keep_fnames: false,
+          //     toplevel: false,
+          //   },
+          // }),
+          new TerserPlugin(),
         ],
   },
 };

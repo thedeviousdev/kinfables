@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 plugins = [
@@ -8,7 +8,10 @@ plugins = [
     throttle: 'lodash.throttle',
   }),
   new webpack.LoaderOptionsPlugin({ minimize: true }),
-  new ExtractTextPlugin('styles.css'),
+  new MiniCssExtractPlugin({
+    filename: "[name].css",
+    chunkFilename: "[id].css",
+  }),
   new VueLoaderPlugin(),
 ];
 
