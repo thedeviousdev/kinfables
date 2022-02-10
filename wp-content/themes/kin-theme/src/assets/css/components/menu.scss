@@ -59,6 +59,10 @@
 
 .menu-link {
   display: none;
+
+  &.menu-circle-link-hover {
+    display: block;
+  }
 }
 
 .menu-circle-link {
@@ -79,12 +83,12 @@
   background-color: rgba(0,0,0,0.6);
 }
 
-.menu-link-1,
-.menu-link-2,
-.menu-link-3,
-.menu-link-4,
-.menu-link-5,
-.menu-link-6 {
+#menuLink1,
+#menuLink2,
+#menuLink3,
+#menuLink4,
+#menuLink5,
+#menuLink6 {
   position: absolute;
   display: flex;
   width: 152px;
@@ -97,26 +101,26 @@
 
 }
 
-.menu-link-1 {
+#menuLink1 {
   transform: rotate(-90deg) translate(120.25px) rotate(90deg);
 }
 
-.menu-link-2 {
+#menuLink2 {
   transform: rotate(-25deg) translate(120.25px) rotate(25deg);
 }
 
-.menu-link-3 {
+#menuLink3 {
   transform: rotate(25deg) translate(120.25px) rotate(-25deg);
 }
 
-.menu-link-4 {
+#menuLink4 {
   transform: rotate(90deg) translate(120.25px) rotate(-90deg);
 }
 
-.menu-link-5 {
+#menuLink5 {
   transform: rotate(155deg) translate(120.25px) rotate(-155deg);
 }
 
-.menu-link-6 {
+#menuLink6 {
   transform: rotate(205deg) translate(120.25px) rotate(-205deg);
 }
