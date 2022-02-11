@@ -9,9 +9,25 @@
   justify-content: center;
 }
 
+.no-animation {
+  animation: none;
+}
 .menu-open {
   .menu-trigger {
-    background-color: transparent;
+    animation: menuCircleRotateForward 1.5s forwards ease-out, menuCircleFadeForward 0.5s 1.5s forwards ease-out;
+  }
+  .menu-bg, .menu-circle {
+    animation: menuBgFadeForward 0.5s 1.5s forwards ease-out;
+    pointer-events: all;
+  }
+}
+
+.menu-closed {
+  .menu-trigger {
+    animation: menuCircleRotateReverse 1.5s forwards ease-out, menuCircleFadeReverse 0.5s forwards ease-out;
+  }
+  .menu-bg, .menu-circle {
+    animation: menuBgFadeReverse 0.2s forwards ease-out;
   }
 }
 
@@ -23,6 +39,10 @@
   bottom: 0;
   left: 0;
   display: flex;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
   align-items: center;
   justify-content: center;
   svg {
@@ -36,9 +56,12 @@
   position: absolute;
   z-index: 2;
   display: block;
+  visibility: hidden;
   overflow: hidden;
-  width: 392.5px;
-  height: 392.5px;
+  min-width: 392.5px;
+  min-height: 392.5px;
+  pointer-events: none;
+  opacity: 0;
   border-radius: 50%;
   background-color: rgba(0,0,0,0.6);
 }
@@ -46,7 +69,7 @@
 .menu-trigger {
   position: absolute;
   z-index: 3;
-  top: calc(50% - 38px);
+  top: 50px;
   left: calc(50% - 38px);
   display: flex;
   width: 76px;
@@ -55,6 +78,72 @@
   background-color: rgba(0,0,0,0.6);
   align-items: center;
   justify-content: center;
+}
+
+@keyframes menuCircleRotateForward {
+  from {
+    top: 50px;
+  }
+  
+  to {
+    top: calc(50% - 38px);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes menuCircleRotateReverse {
+  from {
+    top: calc(50% - 38px);
+    transform: rotate(180deg);
+  }
+  
+  to {
+    top: 50px;
+  }
+}
+
+@keyframes menuCircleFadeForward {
+  from {
+    background-color: rgba(0,0,0,0.6);
+  }
+  
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes menuCircleFadeReverse {
+  from {
+    background-color: transparent;
+  }
+  
+  to {
+    background-color: rgba(0,0,0,0.6);
+  }
+}
+
+@keyframes menuBgFadeForward {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  to {
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+
+@keyframes menuBgFadeReverse {
+  from {
+    visibility: visible;
+    opacity: 100%;
+  }
+  
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 .menu-link {
@@ -66,10 +155,16 @@
 }
 
 .menu-circle-link {
+  @include type-menu;
   top: calc(50% - 76px);
   left: calc(50% - 76px);
   display: block;
   text-decoration: none;
+  color: rgba(255,255,255,0.8);
+
+  &:hover {
+    color: rgba(255,255,255,1);
+  }
 }
 
 .center-circle {
@@ -98,7 +193,6 @@
   border-radius: 50%;
   justify-content: center;
   align-items: center;
-
 }
 
 #menuLink1 {

@@ -1,36 +1,35 @@
 <template>
-  <div class="menu" :class="{ 'menu-open': isMenuOpen }">
+  <div class="menu" :class="{ 'menu-open': openMenu, 'menu-closed': closeMenu }">
     <button class="menu-trigger" @click="toggleMenu">
       <CircleInner />
     </button>
-    <transition name="bounce">
-      <div class="menu-circle" v-if="isMenuOpen">
-        <a href="#" class="menu-circle-link" id="menuLink1" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>Home</span>
-        </a>
+    <div class="menu-circle" :style="{ width: circleDiameter + 'px', height: circleDiameter + 'px' }">
+      <a href="#" class="menu-circle-link" id="menuLink1" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>Home</span>
+      </a>
 
-        <a href="#" class="menu-circle-link" id="menuLink2" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>Film</span>
-        </a>
+      <a href="#" class="menu-circle-link" id="menuLink2" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>Film</span>
+      </a>
 
-        <a href="#" class="menu-circle-link" id="menuLink3" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>Music</span>
-        </a>
+      <a href="#" class="menu-circle-link" id="menuLink3" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>Music</span>
+      </a>
 
-        <a href="#" class="menu-circle-link" id="menuLink4" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>About</span>
-        </a>
+      <a href="#" class="menu-circle-link" id="menuLink4" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>About</span>
+      </a>
 
-        <a href="#" class="menu-circle-link" id="menuLink5" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>Gallery</span>
-        </a>
+      <a href="#" class="menu-circle-link" id="menuLink5" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>Gallery</span>
+      </a>
 
-        <a href="#" class="menu-circle-link" id="menuLink6" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
-          <span>Novel</span>
-        </a>
-      </div>
-    </transition>
-    <div class="menu-bg" v-if="isMenuOpen">
+      <a href="#" class="menu-circle-link" id="menuLink6" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+        <span>Novel</span>
+      </a>
+    </div>
+
+    <div class="menu-bg">
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1923 1922">
         <path class="menu-link" ref="menuLink2" d="M1923 961h-699c-.27-72.201-29.92-137.463-77.58-184.416L1923 0v961Z" fill="#B14F4F"/>
         <path class="" d="M1224 961h-63.5c-.34-54.586-22.97-103.886-59.24-139.259l45.16-45.157c47.66 46.953 77.31 112.215 77.58 184.416Z" fill="#9E4141"/>
@@ -44,6 +43,7 @@
         <path class="" d="m778.597 1143.4 44.651-44.65c-34.2-35.32-55.248-83.45-55.248-136.5 0-.417.001-.834.004-1.25h-63.002l-.002 1c0 70.56 28.054 134.56 73.597 181.4Z" fill="#9E974C"/>
         <path class="menu-link" ref="menuLink1" d="M1146.42 776.584 1923 0H0l779.988 779.177C827.027 731.525 892.322 702 964.5 702c70.86 0 135.09 28.456 181.92 74.584Z" fill="#BC713A"/>
         <path class="" d="m779.988 779.177 44.922 44.876C860.469 788.202 909.766 766 964.25 766c53.3 0 101.64 21.25 137.01 55.741l45.16-45.157C1099.59 730.456 1035.36 702 964.5 702c-72.178 0-137.473 29.525-184.512 77.177Z" fill="#AA6330"/>
+        <path class="" ref="menuCircle" d="m1160.5 962.25C1160.5 1070.64 1072.64 1158.5 964.25 1158.5C855.864 1158.5 768 1070.64 768 962.25C768 853.864 855.864 766 964.25 766C1072.64 766 1160.5 853.864 1160.5 962.25Z" fill="transparent"/>
       </svg>
     </div>
   </div>
@@ -60,12 +60,25 @@ export default {
   props: ["loaderStyle", "showLoader"],
   data() {
     return {
-      isMenuOpen: false
+      openMenu: false,
+      closeMenu: false,
+      circleDiameter: 392.5
     }
   },
   methods: {
     toggleMenu: function() {
-      this.isMenuOpen = !this.isMenuOpen;
+      if((!this.openMenu && !this.closeMenu) || (!this.openMenu && this.closeMenu))
+        this.animateMenuOpen();
+      else if(this.openMenu && !this.closeMenu)
+        this.animateMenuClose();
+    },
+    animateMenuOpen: function() {
+      this.openMenu = true;
+      this.closeMenu = false;
+    },
+    animateMenuClose: function() {
+      this.openMenu = false;
+      this.closeMenu = true;
     },
     sliceHoverOn: function (event) {
       const menuLinkId = event.target.id
@@ -74,7 +87,16 @@ export default {
     sliceHoverOff: function (event) {
       const menuLinkId = event.target.id
       this.$refs[menuLinkId].classList.remove("menu-circle-link-hover")
+    },
+    resizeCircleMenu(event) {
+      this.circleDiameter = this.$refs.menuCircle.getBoundingClientRect();
     }
-  }
+  },
+  created() {
+    window.addEventListener("resize", this.resizeCircleMenu);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.resizeCircleMenu);
+  },
 };
 </script>
