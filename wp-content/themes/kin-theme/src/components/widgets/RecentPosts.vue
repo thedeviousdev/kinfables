@@ -55,7 +55,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('getPosts', { limit: this.limit });
+    // this.$store.dispatch('getPosts', { limit: this.limit });
   },
 };
 </script>
