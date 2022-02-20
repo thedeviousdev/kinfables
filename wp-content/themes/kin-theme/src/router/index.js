@@ -41,13 +41,15 @@ const router = new Router({
   },
 });
 
+
 router.afterEach((to) => { // (to, from)
   // Add a body class specific to the route we're viewing
   let body = document.querySelector('body');
-
+  
   const slug = !(to.params.postSlug)
     ? to.params.pageSlug
     : to.params.postSlug;
+
   body.classList.add('vue--page--' + slug);
 });
 

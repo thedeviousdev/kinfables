@@ -1,11 +1,16 @@
 import api from '../../api';
 import * as types from '../mutation-types';
 
+const createPageSlug = page => {
+  let slug = page.link.replace(window.location.protocol + '//' + window.location.host, '');
+  page.slug = slug;
+  return page;
+};
+
 // initial state
 const state = {
-  all: [],
+  recent: [],
   loaded: false,
-  page: null,
 };
 
 // getters
@@ -34,8 +39,12 @@ const getters = {
 
 // actions
 const actions = {
-  getAllPages({ commit }) {
-    api.getPages(pages => {
+  getPages({ commit }, { limit }) {
+    api.getPages(limit, pages => {
+      pages.map((page, i) => {
+        pages[i] = createPageSlug(page);
+      });
+
       commit(types.STORE_FETCHED_PAGES, { pages });
       commit(types.PAGES_LOADED, true);
       commit(types.INCREMENT_LOADING_PROGRESS);
@@ -46,7 +55,7 @@ const actions = {
 // mutations
 const mutations = {
   [types.STORE_FETCHED_PAGES](state, { pages }) {
-    state.all = pages;
+    state.recent = pages;
   },
 
   [types.PAGES_LOADED](state, val) {

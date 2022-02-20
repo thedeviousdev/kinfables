@@ -27,20 +27,6 @@ export default {
       });
   },
 
-  getPage(id, cb) {
-    if(!Number.isInteger(id) || !id)
-      return false;
-
-    axios
-      .get(SETTINGS.API_BASE_PATH + 'pages/' + id)
-      .then(response => {
-        cb(response.data);
-      })
-      .catch(e => {
-        cb(e);
-      });
-  },
-
   getPosts(limit = 5, cb) {
     axios
       .get(SETTINGS.API_BASE_PATH + 'posts?per_page=' + limit)

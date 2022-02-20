@@ -4,29 +4,29 @@
       <CircleInner />
     </button>
     <div class="menu-circle" :style="{ width: circleDiameter + 'px', height: circleDiameter + 'px' }">
-      <a href="#" class="menu-circle-link" id="menuLink1" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/'" class="menu-circle-link" id="menuLink1" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Home</span>
-      </a>
+      </router-link>
 
-      <a href="#" class="menu-circle-link" id="menuLink2" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/film'" class="menu-circle-link" id="menuLink2" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Film</span>
-      </a>
+      </router-link>
 
-      <a href="#" class="menu-circle-link" id="menuLink3" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/home'" class="menu-circle-link" id="menuLink3" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Music</span>
-      </a>
+      </router-link>
 
-      <a href="#" class="menu-circle-link" id="menuLink4" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/home'" class="menu-circle-link" id="menuLink4" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>About</span>
-      </a>
+      </router-link>
 
-      <a href="#" class="menu-circle-link" id="menuLink5" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/home'" class="menu-circle-link" id="menuLink5" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Gallery</span>
-      </a>
+      </router-link>
 
-      <a href="#" class="menu-circle-link" id="menuLink6" @mouseenter="sliceHoverOn" @mouseleave="sliceHoverOff">
+      <router-link :to="'/home'" class="menu-circle-link" id="menuLink6" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Novel</span>
-      </a>
+      </router-link>
     </div>
 
     <div class="menu-bg">
@@ -53,7 +53,7 @@
 import CircleInner from '../svgs/circle-inner.vue';
 
 export default {
-  name: "Menu",
+  name: "CircleMenu",
   components: {
     CircleInner
   },
@@ -63,6 +63,12 @@ export default {
       openMenu: false,
       closeMenu: false,
       circleDiameter: 392.5
+    }
+  },
+  watch:{
+    $route (to, from){
+      if(this.openMenu && !this.closeMenu)
+        this.animateMenuClose();
     }
   },
   methods: {

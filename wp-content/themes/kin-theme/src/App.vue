@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <Menu />
+    <CircleMenu />
+<!-- 
+    <transition name="loader-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <progress-bar :show-loader="showLoader" :loader-style="loaderStyle" />
+    </transition> -->
+
+    <transition name="slide-fade">
+      <router-view :key="$route.fullPath" />
+    </transition>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
-import Menu from './components/partials/Menu.vue';
+import CircleMenu from './components/partials/CircleMenu.vue';
+import ProgressBar from './components/partials/ProgressBar.vue';
 
 export default {
   name: "Base",
@@ -18,7 +27,7 @@ export default {
   computed: {
     ...mapGetters({
       isLoading: 'isLoading',
-      // loadingProgress: 'loadingProgress',
+      loadingProgress: 'loadingProgress', 
     }),
 
     loaderStyle() {
@@ -27,7 +36,8 @@ export default {
   },
 
   components: {
-    Menu
+    CircleMenu,
+    ProgressBar
   },
 
   watch: {
