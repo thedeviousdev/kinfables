@@ -4,7 +4,7 @@
       <CircleInner />
     </button>
     <div class="menu-circle" :style="{ width: circleDiameter + 'px', height: circleDiameter + 'px' }">
-      <router-link :to="'/'" class="menu-circle-link" id="menuLink1" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
+      <router-link :to="'/home'" class="menu-circle-link" id="menuLink1" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Home</span>
       </router-link>
 
@@ -12,19 +12,19 @@
         <span>Film</span>
       </router-link>
 
-      <router-link :to="'/home'" class="menu-circle-link" id="menuLink3" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
+      <router-link :to="'/music'" class="menu-circle-link" id="menuLink3" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Music</span>
       </router-link>
 
-      <router-link :to="'/home'" class="menu-circle-link" id="menuLink4" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
+      <router-link :to="'/about'" class="menu-circle-link" id="menuLink4" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>About</span>
       </router-link>
 
-      <router-link :to="'/home'" class="menu-circle-link" id="menuLink5" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
+      <router-link :to="'/gallery'" class="menu-circle-link" id="menuLink5" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Gallery</span>
       </router-link>
 
-      <router-link :to="'/home'" class="menu-circle-link" id="menuLink6" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
+      <router-link :to="'/novel'" class="menu-circle-link" id="menuLink6" @mouseenter.native="sliceHoverOn" @mouseleave.native="sliceHoverOff">
         <span>Novel</span>
       </router-link>
     </div>
@@ -89,8 +89,14 @@ export default {
       this.$store.commit("toggleMenuState", false);
     },
     sliceHoverOn: function (event) {
-      const menuLinkId = event.target.id
-      this.$refs[menuLinkId].classList.add("menu-circle-link-hover")
+      const currentPath = this.$route.path;
+      const linkPath = event.srcElement.pathname;
+      console.log('this.$route.path', this.$route.path)
+      console.log('event.srcElement.pathname', event.srcElement.pathname)
+      if(currentPath !== linkPath) {
+        const menuLinkId = event.target.id
+        this.$refs[menuLinkId].classList.add("menu-circle-link-hover")
+      }
     },
     sliceHoverOff: function (event) {
       const menuLinkId = event.target.id
