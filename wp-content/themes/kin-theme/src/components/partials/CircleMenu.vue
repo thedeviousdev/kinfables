@@ -81,10 +81,12 @@ export default {
     animateMenuOpen: function() {
       this.openMenu = true;
       this.closeMenu = false;
+      this.$store.commit("toggleMenuState", true);
     },
     animateMenuClose: function() {
       this.openMenu = false;
       this.closeMenu = true;
+      this.$store.commit("toggleMenuState", false);
     },
     sliceHoverOn: function (event) {
       const menuLinkId = event.target.id

@@ -1,0 +1,6 @@
+.app-page {
+  transition: 1s all;
+  &.blur {
+    filter: blur(3px);
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-if="page">
+  <div class="app-page" :class="{ 'blur': isMenuOpen }" v-if="page">
     <template v-for="(section, index) in page.acf">
       <section v-if="index === 'section-featured'" :key="index" :class="index" :style="{ backgroundImage: 'url(' + section.image.url + ')' }">
         <div class="section-featured-text">
@@ -26,7 +26,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      isMenuOpen: 'isMenuOpen',
+    }),
+  },
 
   beforeMount() {
     this.getPage();
