@@ -1,0 +1,27 @@
+.section-featured {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: end;
+}
+
+.section-featured-text {
+  display: flex;
+  flex-direction: column;
+  padding: 75px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.section-featured-text-title {
+  margin-bottom: 20px;
+  letter-spacing: .4em;
+  font-size: 31px;
+}
+
+.section-featured-text-subtitle {
+  letter-spacing: .4em;
+  font-size: 14px;
+}

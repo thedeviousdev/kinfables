@@ -3,6 +3,7 @@
 
 // Components
 @import 'components/menu';
+@import 'sections/featured';
 
 .slide-fade-enter-active {
   transition: all .3s ease;
@@ -13,4 +14,8 @@
 .slide-fade-enter, .slide-fade-leave-to{
   transform: translateX(10px);
   opacity: 0;
+}
+
+html, body {
+  font-family: "Century Gothic", sans-serif;
 }

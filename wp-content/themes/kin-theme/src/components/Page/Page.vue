@@ -1,11 +1,15 @@
 <template>
-  <div class="bv-example-row pt-4">
-    <template v-if="page">
-      <h1>{{ page.title.rendered }}</h1>
-      <div v-html="page.content.rendered"></div>
+  <div class="" v-if="page">
+    <template v-for="(section, index) in page.acf">
+      <section v-if="index === 'section-featured'" :key="index" :class="index" :style="{ backgroundImage: 'url(' + section.image.url + ')' }">
+        <div class="section-featured-text">
+          <h1 class="section-featured-text-title">{{ section.text.title }}</h1>
+          <p class="section-featured-text-subtitle" role="doc-subtitle">{{ section.text.subtitle }}</p>
+        </div>
+      </section>
     </template>
-    <Loader v-else/>
   </div>
+  <Loader v-else/>
 </template>
 
 <script>
@@ -15,6 +19,7 @@ import { mapGetters } from "vuex";
 import SETTINGS from "../../settings";
 
 export default {
+  name: "Page",
   data() {
     return {
       page: false
