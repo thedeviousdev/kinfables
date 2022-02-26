@@ -106,6 +106,7 @@ export default {
   },
   created() {
     window.addEventListener("resize", this.resizeCircleMenu);
+    this.$store.commit("toggleMenuState", false);
   },
   destroyed() {
     window.removeEventListener("resize", this.resizeCircleMenu);
