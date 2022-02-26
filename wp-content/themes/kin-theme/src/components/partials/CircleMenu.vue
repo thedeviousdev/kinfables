@@ -91,8 +91,6 @@ export default {
     sliceHoverOn: function (event) {
       const currentPath = this.$route.path;
       const linkPath = event.srcElement.pathname;
-      console.log('this.$route.path', this.$route.path)
-      console.log('event.srcElement.pathname', event.srcElement.pathname)
       if(currentPath !== linkPath) {
         const menuLinkId = event.target.id
         this.$refs[menuLinkId].classList.add("menu-circle-link-hover")
