@@ -10,10 +10,7 @@
       <section v-if="index === 'section-gallery'" :key="index" :class="index">
         <div class="section-gallery-filters">
           <button @click="toggleFilter" data-filter="all">All</button>
-          <button @click="toggleFilter" data-filter="illustration">Illustration</button>
-          <button @click="toggleFilter" data-filter="photography">Photography</button>
-          <button @click="toggleFilter" data-filter="fan-art">Fan art</button>
-          <button @click="toggleFilter" data-filter="behind-the-scenes">Behind the scenes</button>
+          <button v-for="(tag, index) in tags" :key="index" @click="toggleFilter" :data-filter="tag.slug">{{ tag.name }}</button>
         </div>
         <div class="section-gallery-images">
           <masonry-wall :items="filteredItems" :ssr-columns="1" :column-width="300" :gap="15">
@@ -46,6 +43,7 @@ export default {
     return {
       page: false,
       filter: "all",
+      tags: null
     };
   },
   components: {
@@ -57,10 +55,7 @@ export default {
       isMenuOpen: 'isMenuOpen',
     }),
     items() {
-      const self = this;
-
-      return self.page.acf['section-gallery'].gallery
-      .map(
+      return this.page.acf['section-gallery'].gallery.map(
         image => {
           return { 
             src_thumb: image.image.sizes.medium_large,
@@ -81,6 +76,7 @@ export default {
 
   beforeMount() {
     this.getPage();
+    this.getTags();
   },
 
   methods: {
@@ -91,6 +87,25 @@ export default {
         )
         .then(response => {
           this.page = response.data[0];
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    getTags: function() {
+      axios
+        .get(
+          SETTINGS.API_BASE_PATH + 'tags?hide_empty=false'
+        )
+        .then(response => {
+          this.tags = response.data.map(
+            tag => {
+              return { 
+                name: tag.name,
+                slug: tag.slug
+              }
+            }
+          )
         })
         .catch(e => {
           console.log(e);
