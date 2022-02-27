@@ -9,14 +9,14 @@
       </section>
       <section v-if="index === 'section-gallery'" :key="index" :class="index">
         <div class="section-gallery-filters">
-          <button>All</button>
-          <button>Illustration</button>
-          <button>Photography</button>
-          <button>Fan art</button>
-          <button>Behind the scenes</button>
+          <button @click="toggleFilter" data-filter="all">All</button>
+          <button @click="toggleFilter" data-filter="illustration">Illustration</button>
+          <button @click="toggleFilter" data-filter="photography">Photography</button>
+          <button @click="toggleFilter" data-filter="fan-art">Fan art</button>
+          <button @click="toggleFilter" data-filter="behind-the-scenes">Behind the scenes</button>
         </div>
         <div class="section-gallery-images">
-          <masonry-wall :items="items" :ssr-columns="1" :column-width="300" :gap="15">
+          <masonry-wall :items="filteredItems" :ssr-columns="1" :column-width="300" :gap="15">
             <template #default="{ item, index }">
               <Lightbox 
                 :src_thumb="item.src_thumb"
@@ -45,6 +45,7 @@ export default {
   data() {
     return {
       page: false,
+      filter: "all",
     };
   },
   components: {
@@ -56,7 +57,10 @@ export default {
       isMenuOpen: 'isMenuOpen',
     }),
     items() {
-      return this.page.acf['section-gallery'].gallery.map(
+      const self = this;
+
+      return self.page.acf['section-gallery'].gallery
+      .map(
         image => {
           return { 
             src_thumb: image.image.sizes.medium_large,
@@ -66,6 +70,12 @@ export default {
           }
         }
       )
+    },
+    filteredItems() {
+      if(this.filter === "all")
+        return this.items
+      
+      return this.items.filter(image => image.tags.includes(this.filter))
     }
   },
 
@@ -85,6 +95,9 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    toggleFilter(event) {
+      this.filter = event.currentTarget.getAttribute('data-filter');
     }
   },
 };
