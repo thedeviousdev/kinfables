@@ -10,6 +10,17 @@
 @import 'sections/featured';
 @import 'sections/gallery';
 
+.fade-slow-enter-active {
+  transition: all .4s ease;
+}
+
+.fade-slow-leave-active {
+  transition: all .4s;
+}
+.fade-slow-enter, .fade-slow-leave-to {
+  opacity: 0;
+}
+
 .fade-enter-active {
   transition: all .2s ease;
 }

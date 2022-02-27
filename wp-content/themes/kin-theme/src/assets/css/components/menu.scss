@@ -25,7 +25,7 @@
 
 .menu-closed {
   .menu-trigger {
-    animation: menuCircleRotateReverse 1.5s forwards ease-out, menuCircleFadeReverse 0.5s forwards ease-out;
+    animation: menuCircleRotateReverse 1.5s forwards ease-out, menuCircleFadeReverse 0.5s forwards ease-out, glow 2.5s infinite alternate;
   }
   .menu-bg, .menu-circle {
     animation: menuBgFadeReverse 0.2s forwards ease-out;
@@ -83,6 +83,7 @@
   display: flex;
   width: 76px;
   height: 76px;
+  animation: glow 2.5s infinite alternate;
   pointer-events: all;
   border-radius: 50%;
   background-color: rgba(0,0,0,0.6);
@@ -95,14 +96,25 @@
   opacity: 0;
 }
 
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px 0 rgb(255 255 255 / 25%);
+  }
+
+  to {
+    box-shadow: 0 0 20px 5px rgb(255 255 255 / 25%);
+  }
+}
 @keyframes menuCircleRotateForward {
   from {
     top: 50px;
+    box-shadow: 0 0 20px 0 rgb(255 255 255 / 25%);
   }
   
   to {
     top: calc(50% - 38px);
     transform: rotate(180deg);
+    box-shadow: 0 0 20px 0 rgb(255 255 255 / 0);
   }
 }
 

@@ -6,7 +6,7 @@
       <progress-bar :show-loader="showLoader" :loader-style="loaderStyle" />
     </transition> -->
 
-    <transition name="fade">
+    <transition name="fade-slow">
       <router-view :key="$route.fullPath" />
     </transition>
   </div>
