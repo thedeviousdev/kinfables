@@ -4,7 +4,10 @@
 // Components
 @import 'components/menu';
 @import 'components/page';
+
+// Sections
 @import 'sections/featured';
+@import 'sections/gallery';
 
 .slide-fade-enter-active {
   transition: all .3s ease;

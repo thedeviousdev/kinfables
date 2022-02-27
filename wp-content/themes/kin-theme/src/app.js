@@ -6,6 +6,7 @@ import router from './router';
 import App from './App.vue';
 import store from './store';
 import * as types from './store/mutation-types';
+import MasonryWall from '@yeger/vue2-masonry-wall'
 
 new Vue({
   el: '#app',
@@ -17,3 +18,5 @@ new Vue({
     this.$store.dispatch('getAllCategories');
   },
 });
+
+Vue.use(MasonryWall)

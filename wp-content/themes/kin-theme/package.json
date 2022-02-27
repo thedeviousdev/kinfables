@@ -46,6 +46,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "dependencies": {
+    "@yeger/vue2-masonry-wall": "^2.0.19",
     "axios": "^0.21.1",
     "css-loader": "^6.6.0",
     "stylelint-scss": "^4.1.0",
