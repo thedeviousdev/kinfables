@@ -3,23 +3,25 @@
 
 // Components
 @import 'components/menu';
+@import 'components/lightbox';
 @import 'components/page';
 
 // Sections
 @import 'sections/featured';
 @import 'sections/gallery';
 
-.slide-fade-enter-active {
-  transition: all .3s ease;
+.fade-enter-active {
+  transition: all .2s ease;
 }
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+
+.fade-leave-active {
+  transition: all .2s;
 }
-.slide-fade-enter, .slide-fade-leave-to{
-  transform: translateX(10px);
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
 html, body {
+  background-color: #000;
   font-family: "Century Gothic", sans-serif;
 }

@@ -18,7 +18,12 @@
         <div class="section-gallery-images">
           <masonry-wall :items="items" :ssr-columns="1" :column-width="300" :gap="15">
             <template #default="{ item, index }">
-              <img :src="item.src_thumb" :alt="item.alt">
+              <Lightbox 
+                :src_thumb="item.src_thumb"
+                :src_full="item.src_full"
+                :alt="item.alt"
+                :index="index"
+              />
             </template>
           </masonry-wall>
         </div>
@@ -33,6 +38,7 @@ import axios from "axios";
 import Loader from "../partials/Loader.vue";
 import { mapGetters } from "vuex";
 import SETTINGS from "../../settings";
+import Lightbox from "../partials/Lightbox.vue"
 
 export default {
   name: "Page",
@@ -41,7 +47,10 @@ export default {
       page: false,
     };
   },
-
+  components: {
+    Loader,
+    Lightbox
+  },
   computed: {
     ...mapGetters({
       isMenuOpen: 'isMenuOpen',
@@ -78,9 +87,5 @@ export default {
         });
     }
   },
-
-  components: {
-    Loader
-  }
 };
 </script>
